@@ -1,54 +1,41 @@
 import tensorflow as tf
 import numpy as np
+from config import Config
 from glob import glob
-from Preprocess import *
+from data import *
+
 
 class CGAN(object):
-    def __init__(self, sess, image_size=240,
-                 batch_size=1, sample_size=1, output_size=256,
-                 gf_dim=64, df_dim=64, L1_lambda=100,
-                 input_c_dim=3, output_c_dim=3, dataset_name='facades',
-                 checkpoint_dir=None, sample_dir=None):
+    def __init__(self):
+        self.image = tf.placeholder()
+        self.cond = tf.placeholder()
+        self.noise = tf.placeholer()
+        self.gen_img = self.generator(self.noise, self.cond)
+        pos = self.D(self.image, self.cond)
+        pos_loss = tf.reduce_mean(tf.nn.sigmoid_cross_entropy_with_logits(logits=pos, labels=tf.ones.like(pos)))
+        neg = self.G(self.gen_img, self.cond)
+        neg_loss = tf.reduce_mean(tf.nn.sigmoid_cross_entropy_with_logits(logits=neg, labels=tf.zeros.like(neg)))
+        self.d_loss = pos_loss + neg_loss
+        self.g_loss = tf.reduce_mean(tf.nn.sigmoid_cross_entropy_with_logits(logits=neg, labels=tf.ones.like(neg))) + \
+                      Config.L1_lambda * tf.reduce_mean(tf.abs(self.image - self.gen_img))
 
-        """
-        Args:
-            sess: TensorFlow session
-            batch_size: The size of batch. Should be specified before training.
-            output_size: (optional) The resolution in pixels of the images. [256]
-            gf_dim: (optional) Dimension of gen filters in first conv layer. [64]
-            df_dim: (optional) Dimension of discrim filters in first conv layer. [64]
-            input_c_dim: (optional) Dimension of input image color. For grayscale input, set to 1. [3]
-            output_c_dim: (optional) Dimension of output image color. For grayscale input, set to 1. [3]
-        """
-        #input
-        self.real_img = tf.placeholder(tf.float32, [self.batch_size, self.image_size, self.image_size,
-                                                    self.input_c_dim + self.output_c_dim], name='real_A_and_B_images')
-        self.condition = tf.placeholder()
+    def D(img, cond):
+        dim = len (img.shape())
+        with tf.variable.scope("disc"):
+            concat = tf.concat(dim-1, [img, cond])
+            # conv2d layers
 
-        #random seed
-        self.noise = tf.random_normal()
+            # linear regression layer
 
-
-        #discriminator
-        
+            #return result
 
 
 
-        #generator
+    def G(noise, cond):
+        with tf.variable_scope("gen"):
+            pass
 
 
 
 
-
-
-
-    def load_random_samples(self):
-        data = np.random.choice(glob('./datasets/{}/val/*.jpg'.format(self.dataset_name)), self.batch_size)
-        sample = [load_data(sample_file) for sample_file in data]
-
-        if (self.is_grayscale):
-            sample_images = np.array(sample).astype(np.float32)[:, :, :, None]
-        else:
-            sample_images = np.array(sample).astype(np.float32)
-        return sample_images
 
