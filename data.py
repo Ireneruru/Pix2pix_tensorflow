@@ -1,7 +1,5 @@
 from config import Config as conf
 from utils import imread
-import scipy.misc
-import numpy as np
 import os
 
 def load(path):
