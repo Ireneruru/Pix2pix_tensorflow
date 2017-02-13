@@ -36,5 +36,5 @@ def linear(input, output_size, scope=None, stddev=0.02, bias_start=0.0):
 def imread(path):
     return scipy.misc.imread(path).astype(np.float)
 
-def imsave(images, path):
-    return scipy.misc.imsave(path, images.reshape())
+def imsave(image, path):
+    return scipy.misc.imsave(path, image)
