@@ -24,8 +24,8 @@ def train():
     data = load_data()
     model = CGAN()
 
-    d_opt = tf.train.AdamOptimizer().minimize(model.d_loss)
-    g_opt = tf.train.AdamOptimizer().minimize(model.g_loss)
+    d_opt = tf.train.AdamOptimizer(learning_rate=conf.learning_rate).minimize(model.d_loss)
+    g_opt = tf.train.AdamOptimizer(learning_rate=conf.learning_rate).minimize(model.g_loss)
 
     saver = tf.train.Saver()
 

@@ -7,8 +7,8 @@ class Config:
     img_channel = 3
     conv_channel_base = 64
 
-    learning_rate = 0.01
+    learning_rate = 0.0002
     max_epoch = 100
-    L1_lambda = 0.1
-    save_per_epoch=1
+    L1_lambda = 100
+    save_per_epoch=5
 
