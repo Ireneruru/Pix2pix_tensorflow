@@ -21,7 +21,8 @@ python main.py train.py
 Here shows some of the pictures generated from this implementation.
 
 - Datasets: Facades
-  <img src="./result.png" width="700px"/>
+
+<img src="./result.png" width="700px"/>
 
 
 ## Train
