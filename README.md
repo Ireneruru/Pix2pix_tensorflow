@@ -18,7 +18,11 @@ bash ./download_dataset.sh facades
 python main.py train.py
 ```
 ## Results
- ---to be updated
+Here shows some of the pictures generated from this implementation.
+
+- Datasets: Facades
+  <img src="./result.png" width="700px"/>
+
 
 ## Train
 Current code supports [CMP Facades](http://cmp.felk.cvut.cz/~tylecr1/facade/) dataset.

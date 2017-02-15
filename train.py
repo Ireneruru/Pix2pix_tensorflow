@@ -37,22 +37,21 @@ def train():
     data = load_data()
     model = CGAN()
 
-    d_opt = tf.train.AdamOptimizer(learning_rate=conf.learning_rate).minimize(model.d_loss)
-    g_opt = tf.train.AdamOptimizer(learning_rate=conf.learning_rate).minimize(model.g_loss)
+    d_opt = tf.train.AdamOptimizer(learning_rate=conf.learning_rate).minimize(model.d_loss, var_list=model.d_vars)
+    g_opt = tf.train.AdamOptimizer(learning_rate=conf.learning_rate).minimize(model.g_loss, var_list=model.g_vars)
 
     saver = tf.train.Saver()
 
     counter = 0
     start_time = time.time()
-
     if not os.path.exists(conf.data_path + "/checkpoint"):
-        os.makedirs(conf.data_path + "/checkpoint")
+	os.makedirs(conf.data_path + "/checkpoint")
     if not os.path.exists(conf.output_path):
         os.makedirs(conf.output_path)
-
+    
     with tf.Session() as sess:
         if conf.model_path == "":
-            sess.run(tf.global_variables_initializer())
+            sess.run(tf.initialize_all_variables())
         else:
             saver.restore(sess, conf.model_path)
         for epoch in xrange(conf.max_epoch):

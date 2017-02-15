@@ -19,6 +19,10 @@ class CGAN(object):
         self.g_loss = tf.reduce_mean(tf.nn.sigmoid_cross_entropy_with_logits(neg, tf.ones_like(neg))) + \
                       conf.L1_lambda * tf.reduce_mean(tf.abs(self.image - self.gen_img))
 
+	t_vars = tf.trainable_variables()
+        self.d_vars = [var for var in t_vars if 'disc' in var.name]
+        self.g_vars = [var for var in t_vars if 'gen' in var.name]
+
     def discriminator(self, img, cond, reuse):
         dim = len(img.get_shape())
         with tf.variable_scope("disc", reuse=reuse):
