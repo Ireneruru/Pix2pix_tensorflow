@@ -34,7 +34,7 @@ def linear(input, output_size, scope=None, stddev=0.02, bias_start=0.0):
         return tf.matmul(input, weight) + bias
 
 def imread(path):
-    return scipy.misc.imread(path).astype(np.float)
+    return scipy.misc.imread(path)
 
 def imsave(image, path):
     return scipy.misc.imsave(path, image)

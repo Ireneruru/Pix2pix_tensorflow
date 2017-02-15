@@ -1,19 +1,32 @@
 from config import Config as conf
 from data import *
+import scipy.misc
 from model import CGAN
 from utils import imsave
 import tensorflow as tf
 import numpy as np
 import time
 
-def prepocess_train(img, cond):
-    img = img.reshape(1, conf.img_size, conf.img_size, conf.img_channel)
-    cond = cond.reshape(1, conf.img_size, conf.img_size, conf.img_channel)
+def prepocess_train(img, cond,):
+    img = scipy.misc.imresize(img, [conf.adjust_size, conf.adjust_size])
+    cond = scipy.misc.imresize(cond, [conf.adjust_size, conf.adjust_size])
+    h1 = int(np.ceil(np.random.uniform(1e-2, conf.adjust_size - conf.train_size)))
+    w1 = int(np.ceil(np.random.uniform(1e-2, conf.adjust_size - conf.adjust_size)))
+    img = img[h1:h1 + conf.train_size, w1:w1 + conf.train_size]
+    cond = cond[h1:h1 + conf.train_size, w1:w1 + conf.train_size]
+    if np.random.random() > 0.5:
+        img = np.fliplr(img)
+        cond = np.fliplr(cond)
     img = img/127.5 - 1.
     cond = cond/127.5 - 1.
+    img = img.reshape(1, conf.img_size, conf.img_size, conf.img_channel)
+    cond = cond.reshape(1, conf.img_size, conf.img_size, conf.img_channel)
     return img,cond
 
 def prepocess_test(img, cond):
+
+    img = scipy.misc.imresize(img, [conf.train_size, conf.train_size])
+    cond = scipy.misc.imresize(cond, [conf.train_size, conf.train_size])
     img = img.reshape(1, conf.img_size, conf.img_size, conf.img_channel)
     cond = cond.reshape(1, conf.img_size, conf.img_size, conf.img_channel)
     img = img/127.5 - 1.
@@ -41,6 +54,7 @@ def train():
             train_data = data["train"]
             for img, cond in train_data:
                 img, cond = prepocess_train(img, cond)
+                _, m = sess.run([d_opt, model.d_loss], feed_dict={model.image:img, model.cond:cond})
                 _, m = sess.run([d_opt, model.d_loss], feed_dict={model.image:img, model.cond:cond})
                 _, M = sess.run([g_opt, model.g_loss], feed_dict={model.image:img, model.cond:cond})
                 counter += 1
