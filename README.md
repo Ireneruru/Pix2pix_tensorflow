@@ -1,5 +1,5 @@
 #  Pix2pix_tensorflow
-Implement Image-to-Image Translation with Conditional Adversarial Networks   https://github.com/phillipi/pix2pix on tensorflow.
+Implement [Image-to-Image Translation with Conditional Adversarial Networks](https://arxiv.org/abs/1611.07004?context=cs) on tensorflow.
 
 ## Setup
 
@@ -18,7 +18,7 @@ bash ./download_dataset.sh facades
 python main.py train.py
 ```
 ## Train
-Current code supports [CMP Facades](http://cmp.felk.cvut.cz/~tylecr1/facade/) dataset.
+Current code supports [CMP Facades](http://cmp.felk.cvut.cz/~tylecr1/facade/) dataset. And the latest implementation trains for 200 epochs.
 
 ## Results
 Here shows some of the pictures generated from this implementation.
@@ -30,7 +30,8 @@ Here shows some of the pictures generated from this implementation.
 
 </div>
 
+## Acknowledgments
 
-
+My implementation referenced [pix2pix](https://github.com/phillipi/pix2pix). Thanks for their excellent work!
 
 
