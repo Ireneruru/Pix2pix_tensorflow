@@ -21,9 +21,11 @@ python main.py train.py
 Here shows some of the pictures generated from this implementation.
 
 - Datasets: Facades
+<div align=center>
 
-<img src="./result.png" width="700px"/>
+!<img src="./result.png" width="800px"/>
 
+</div>
 
 ## Train
 Current code supports [CMP Facades](http://cmp.felk.cvut.cz/~tylecr1/facade/) dataset.
