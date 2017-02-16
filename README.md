@@ -15,10 +15,11 @@ bash ./download_dataset.sh facades
 ```
 - Train the model
 ```bash
-python main.py train.py
+bash python train.py
 ```
 ## Train
 Current code supports [CMP Facades](http://cmp.felk.cvut.cz/~tylecr1/facade/) dataset. And the latest implementation trains for 200 epochs.
+You are free to modify the constants in config.py.
 
 ## Results
 Here shows some of the pictures generated from this implementation.
