@@ -43,5 +43,5 @@ My implementation referenced [pix2pix](https://github.com/phillipi/pix2pix). Tha
 
 Copyright (c) Yiru Chen
 
-Licensed under the Apache License.
+Licensed under the Apache License 2.0.
 
