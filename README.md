@@ -36,3 +36,8 @@ Here shows some of the pictures generated from this implementation.
 My implementation referenced [pix2pix](https://github.com/phillipi/pix2pix). Thanks for their excellent work!
 
 
+## License
+
+Copyright (c) Yiru Chen
+Licensed under the Apache License.
+
