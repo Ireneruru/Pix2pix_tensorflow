@@ -1,4 +1,7 @@
-#  Pix2pix_tensorflow
+#  Pix2pix_tensorflowCode 
+
+Copyright@ Yiru Chen
+
 Implement [Image-to-Image Translation with Conditional Adversarial Networks](https://arxiv.org/abs/1611.07004?context=cs) on tensorflow.
 
 ## Setup
@@ -39,5 +42,6 @@ My implementation referenced [pix2pix](https://github.com/phillipi/pix2pix). Tha
 ## License
 
 Copyright (c) Yiru Chen
+
 Licensed under the Apache License.
 
